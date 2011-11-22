@@ -30,4 +30,15 @@ Feedback
 --------
 Issue tracker: https://github.com/aur1mas/Wkhtmltopdf/issues
 
+
 Installation on Symfony2
+------------------------
+
+Add library to autoload.php at the end by writing this line:
+
+//WkHtmlToPdf
+require(__DIR__ . '/../vendor/wkhtmltopdf/WKPDF.php');
+
+Change permissions for wkhtmltopdf-i386.so to be able to convert html files using the shell command through your Symfony app
+
+Run phing cache command in order to create the temporary directory  and give it permissions where the pdf's will be generated
