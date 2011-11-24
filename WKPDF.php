@@ -110,7 +110,7 @@
                  * Constructor: initialize command line and reserve temporary file.
                  */
                 public function __construct(){
-                        $this->cmd=$GLOBALS['WKPDF_BASE_PATH'].'wkhtmltopdf-'.self::_getCPU();
+                        $this->cmd=$GLOBALS['WKPDF_BASE_PATH'].'wkhtmltopdf';
                         if(!file_exists($this->cmd))throw new Exception('WKPDF static executable "'.htmlspecialchars($this->cmd,ENT_QUOTES).'" was not found.');
                         do{
 //                                $this->tmp=$GLOBALS['WKPDF_BASE_PATH'].'tmp/'.mt_rand().'.html';
