@@ -81,6 +81,19 @@
                         }
                         return self::$cpu;
                 }
+
+	            /**
+                 * Function that attempts to return the kind of CPU.
+                 * @return string CPU kind ('amd64' or 'i386').
+                 */
+                private static function _getCPU2(){
+                        if(self::$cpu==''){
+                                if(`uname -m`!='x86_64') self::$cpu='amd64';
+                                elseif(`uname -m`!='i686')   self::$cpu='i386';
+                                else throw new Exception('WKPDF couldn\'t determine CPU ("'.`grep -i vendor_id /proc/cpuinfo`.'").');
+                        }
+                        return self::$cpu;
+                }
                 /**
                  * Force the client to download PDF file when finish() is called.
                  */
@@ -110,7 +123,7 @@
                  */
                 public function __construct(){
                         $GLOBALS['WKPDF_BASE_SITE']='http://'.$_SERVER['SERVER_NAME'].'/';
-                        $this->cmd=$GLOBALS['WKPDF_BASE_PATH'].'wkhtmltopdf-'.$this->_getCPU();
+                        $this->cmd=$GLOBALS['WKPDF_BASE_PATH'].'wkhtmltopdf-'.$this->_getCPU2();
                         if(!file_exists($this->cmd))throw new Exception('WKPDF static executable "'.htmlspecialchars($this->cmd,ENT_QUOTES).'" was not found.');
                         do{
 //                                $this->tmp=$GLOBALS['WKPDF_BASE_PATH'].'tmp/'.mt_rand().'.html';
